@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:900px; height:383px; font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background:linear-gradient(120deg,#1e1b4b 0%,#312e81 34%,#5b21b6 68%,#7c3aed 100%);
+    position:relative; overflow:hidden; color:#fff; }
+  .grid { position:absolute; inset:0; background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px); background-size:36px 36px; }
+  .glow1 { position:absolute; width:420px; height:420px; border-radius:50%; background:radial-gradient(circle,rgba(168,85,247,.45),transparent 65%); top:-160px; right:-60px; }
+  .glow2 { position:absolute; width:360px; height:360px; border-radius:50%; background:radial-gradient(circle,rgba(59,130,246,.35),transparent 65%); bottom:-180px; left:-80px; }
+  .wrap { position:relative; z-index:2; display:flex; height:100%; padding:44px 52px; }
+  .left { flex:1.25; display:flex; flex-direction:column; justify-content:center; }
+  .badge { display:inline-flex; align-items:center; gap:8px; width:fit-content; background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.28);
+    border-radius:999px; padding:6px 16px; font-size:14px; letter-spacing:2px; margin-bottom:20px; backdrop-filter:blur(4px); }
+  h1 { font-size:52px; font-weight:800; line-height:1.22; letter-spacing:1px; }
+  h1 .accent { background:linear-gradient(90deg,#c4b5fd,#93c5fd); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .sub { margin-top:18px; font-size:19px; color:rgba(255,255,255,.82); letter-spacing:1px; line-height:1.6; }
+  .tags { margin-top:22px; display:flex; gap:10px; }
+  .tag { font-size:14px; padding:6px 14px; border-radius:8px; background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22); letter-spacing:1px; }
+  .right { flex:1; display:flex; align-items:center; justify-content:center; }
+  .path { position:relative; width:300px; height:295px; }
+  .node { position:absolute; display:flex; align-items:center; gap:10px; }
+  .dot { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:17px; font-weight:700;
+    background:rgba(255,255,255,.15); border:2px solid rgba(255,255,255,.55); box-shadow:0 0 18px rgba(167,139,250,.5); }
+  .lbl { font-size:16px; font-weight:600; letter-spacing:1px; color:rgba(255,255,255,.92); white-space:nowrap; }
+  .n1 { left:8px; top:236px; } .n2 { left:96px; top:180px; } .n3 { left:150px; top:122px; } .n4 { left:196px; top:62px; }
+  .n5 { left:236px; top:0; }
+  .n5 .dot { background:linear-gradient(135deg,#fbbf24,#f59e0b); border-color:#fde68a; box-shadow:0 0 24px rgba(251,191,36,.75); }
+  .line { position:absolute; left:27px; top:20px; width:240px; height:240px; z-index:-1; }
+  .foot { position:absolute; z-index:2; right:52px; bottom:20px; font-size:13px; letter-spacing:2px; color:rgba(255,255,255,.55); }
+</style>
+</head>
+<body>
+  <div class="grid"></div><div class="glow1"></div><div class="glow2"></div>
+  <div class="wrap">
+    <div class="left">
+      <div class="badge">⭐ 完全开源 · 免费 · 持续维护</div>
+      <h1>全栈 + AI Agent<br><span class="accent">学习路线图</span></h1>
+      <div class="sub">58 万字 · 110 个教程 · 30+ 验收项目<br>从零基础到 AI Agent 全栈工程师</div>
+      <div class="tags"><span class="tag">Python</span><span class="tag">React</span><span class="tag">FastAPI</span><span class="tag">LLM</span><span class="tag">Agent</span></div>
+    </div>
+    <div class="right">
+      <div class="path">
+        <svg class="line" viewBox="0 0 240 240"><path d="M 8 232 C 90 220, 60 140, 120 118 S 220 40, 232 8" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="3" stroke-dasharray="7 8" stroke-linecap="round"/></svg>
+        <div class="node n1"><div class="dot">1</div><div class="lbl">地基</div></div>
+        <div class="node n2"><div class="dot">2</div><div class="lbl">前端</div></div>
+        <div class="node n3"><div class="dot">3</div><div class="lbl">后端</div></div>
+        <div class="node n4"><div class="dot">4</div><div class="lbl">AI 核心</div></div>
+        <div class="node n5"><div class="dot">🎓</div><div class="lbl">毕业</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot">Obsidian · Markdown · CC BY-SA 4.0</div>
+</body>
+</html>

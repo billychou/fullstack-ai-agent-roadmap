@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { width:1080px; font-family:-apple-system,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif; background:#fff; padding:48px 56px 52px; }
+  .title { text-align:center; font-size:30px; font-weight:800; color:#1e1b4b; }
+  .title small { display:block; margin-top:10px; font-size:15px; font-weight:400; color:#6b7280; letter-spacing:2px; }
+  .loop { position:relative; width:680px; height:520px; margin:36px auto 0; }
+  .center { position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:240px; height:240px; border-radius:50%;
+    background:linear-gradient(135deg,#4c1d95,#7c3aed); color:#fff; display:flex; flex-direction:column; align-items:center; justify-content:center;
+    box-shadow:0 12px 40px rgba(124,58,237,.4); text-align:center; }
+  .center b { font-size:24px; letter-spacing:2px; }
+  .center span { margin-top:10px; font-size:14px; line-height:1.7; color:rgba(255,255,255,.85); }
+  .step { position:absolute; width:210px; background:#fff; border:1.5px solid #e5e7eb; border-radius:14px; padding:14px 18px; box-shadow:0 4px 16px rgba(17,24,39,.07); text-align:center; }
+  .step h4 { font-size:17px; font-weight:800; color:#312e81; }
+  .step p { margin-top:5px; font-size:13.5px; color:#6b7280; line-height:1.55; }
+  .s1 { left:235px; top:-14px; }
+  .s2 { right:-30px; top:150px; }
+  .s3 { right:20px; bottom:-20px; }
+  .s4 { left:20px; bottom:-20px; }
+  .s5 { left:-30px; top:150px; }
+  .arrows { position:absolute; inset:0; z-index:-1; }
+  .foot { margin-top:34px; text-align:center; font-size:15.5px; color:#7c3aed; font-weight:600; background:#f5f3ff; border:1px dashed #c4b5fd; border-radius:12px; padding:14px; }
+</style>
+</head>
+<body>
+  <div class="title">强制反馈系统<small>坚持不靠意志力，靠系统</small></div>
+  <div class="loop">
+    <svg class="arrows" viewBox="0 0 680 520" fill="none">
+      <ellipse cx="340" cy="260" rx="300" ry="238" stroke="#ddd6fe" stroke-width="3" stroke-dasharray="8 9"/>
+      <path d="M 470 46 l 14 -4 m -14 4 l 2 14" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 636 300 l 8 12 m -8 -12 l -14 2" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 540 486 l -14 4 m 14 -4 l -4 -14" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 130 480 l -12 -8 m 12 8 l 2 -14" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+      <path d="M 46 240 l 6 -14 m -6 14 l 14 4" stroke="#a78bfa" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <div class="center"><b>学习契约</b><span>写下目标与承诺<br>每 12~18 个月兑现一次</span></div>
+    <div class="step s1"><h4>📅 每日学习</h4><p>固定 3 小时，跟着章节走</p></div>
+    <div class="step s2"><h4>🎯 验收项目</h4><p>每章一个，做出来才算过</p></div>
+    <div class="step s3"><h4>📝 双周周报</h4><p>写了什么、卡在哪、下一步</p></div>
+    <div class="step s4"><h4>🚩 里程碑检查</h4><p>阶段末对照路线图复盘</p></div>
+    <div class="step s5"><h4>🔁 调整计划</h4><p>根据反馈修订学习契约</p></div>
+  </div>
+  <div class="foot">💡 配套模板全部内置在仓库里：学习契约 / 周报 / 里程碑，拿来即用</div>
+</body>
+</html>
