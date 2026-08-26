@@ -45,6 +45,8 @@ status: index
 - [[deepseek-harness学习指南]] — DeepSeek Harness（dsh）系统学习指南：原理架构 / 上手实践 / 插件生态 / 趋势分析
 - [[deepseek-harness实践]] — dsh 本地源码安装与试用实录（pnpm 构建全流程）
 - [[Agent工程师12步路线图]] — @0xCodez 七大支柱（Context/Tools/Memory/Loops/Graphs/Harness/Evals）12 步成长路线（2026 译文摘录）
+- [[Ralph Loop：一切皆循环]] — Geoffrey Huntley：从搭积木到编程循环，单体 Agent + Watch the loop + 演化式软件工厂（2026 译文摘录）
+- [[软件工程AI学习规划]] — 个人课程规划：AI 增强开发工作流四阶段 14 周（软件工程三支柱 → Agent 工作流 → 可靠性 → 毕业项目）
 
 ## 🌱 生活
 
