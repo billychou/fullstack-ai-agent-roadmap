@@ -1,0 +1,1 @@
+“whilst”最常见的意思是“当……的时候；虽然”，属于英式书面用词，美式英语更多用while，多用于正式文章、技术文档。 - **词性**：连词 (conj.) - **音标**：英 /waɪlst/，美 /waɪlst/ - **常见搭配**： - whilst doing sth（当做某事的时候） - whilst some people…（虽然有些人……） - **例句**：Whilst working on the project, he found a useful Git feature.（在做这个项目的时候，他发现了一个实用的Git功能。）
