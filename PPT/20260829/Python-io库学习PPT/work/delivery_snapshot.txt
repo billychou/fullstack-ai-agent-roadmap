@@ -1,0 +1,389 @@
+# snapshot v1 | Python-io库学习PPT.pptx | slides=22 | shapes=388
+P01 sp | bbox=3.26,-0.50,6.80,6.80 | rot=0
+P01 sp | bbox=4.21,0.45,4.90,4.90 | rot=0
+P01 sp | bbox=5.13,1.37,3.06,3.06 | rot=0
+P01 sp | bbox=2.40,2.06,8.53,0.34 | rot=0 | fs=1300 | text=PYTHON STANDARD LIBRARY · IO MODULE
+P01 sp | bbox=1.20,2.56,10.93,1.25 | rot=0 | fs=5800 | text=Python io 库深度解析
+P01 sp | bbox=6.16,3.98,1.00,0.04 | rot=0
+P01 sp | bbox=2.40,4.22,8.53,0.50 | rot=0 | fs=2200 | text=从底层原理到具体应用
+P01 sp | bbox=2.40,4.86,8.53,0.40 | rot=0 | fs=1300 | text=三类 I/O · 缓冲机制 · 内存流 · 性能实测
+P02 sp | bbox=0.62,1.30,4.00,0.30 | rot=0 | fs=1200 | text=CONTENTS
+P02 sp | bbox=5.00,1.30,1.15,1.10 | rot=0 | fs=3400 | text=01
+P02 sp | bbox=6.35,1.38,6.35,0.50 | rot=0 | fs=2100 | text=认识 io 模块
+P02 sp | bbox=0.60,1.66,4.00,0.90 | rot=0 | fs=4000 | text=目录
+P02 sp | bbox=6.35,1.90,6.35,0.42 | rot=0 | fs=1400 | text=统一流处理入口的定位，三类 I/O 的职责边界
+P02 sp | bbox=5.00,2.54,7.70,0.00 | rot=0
+P02 sp | bbox=0.62,2.56,0.90,0.04 | rot=0
+P02 sp | bbox=0.62,2.70,3.60,1.60 | rot=0 | fs=1400 | text=四章学习路线：从认识模块、拆解原理，到实战应用与性能调优。
+P02 sp | bbox=5.00,2.72,1.15,1.10 | rot=0 | fs=3400 | text=02
+P02 sp | bbox=6.35,2.80,6.35,0.50 | rot=0 | fs=2100 | text=底层原理
+P02 sp | bbox=6.35,3.32,6.35,0.42 | rot=0 | fs=1400 | text=IOBase 类层次、缓冲机制、编码与换行转换
+P02 sp | bbox=5.00,3.96,7.70,0.00 | rot=0
+P02 sp | bbox=5.00,4.14,1.15,1.10 | rot=0 | fs=3400 | text=03
+P02 sp | bbox=6.35,4.22,6.35,0.50 | rot=0 | fs=2100 | text=应用实战
+P02 sp | bbox=6.35,4.74,6.35,0.42 | rot=0 | fs=1400 | text=文件读写、StringIO/BytesIO 内存流、标准流重定向
+P02 sp | bbox=5.00,5.38,7.70,0.00 | rot=0
+P02 sp | bbox=5.00,5.56,1.15,1.10 | rot=0 | fs=3400 | text=04
+P02 sp | bbox=6.35,5.64,6.35,0.50 | rot=0 | fs=2100 | text=性能与最佳实践
+P02 sp | bbox=6.35,6.16,6.35,0.42 | rot=0 | fs=1400 | text=实测性能对比、大文件处理、常见陷阱规避
+P03 sp | bbox=3.66,0.40,6.00,6.00 | rot=0
+P03 sp | bbox=4.50,1.24,4.32,4.32 | rot=0
+P03 sp | bbox=5.31,2.05,2.70,2.70 | rot=0
+P03 sp | bbox=2.40,2.28,8.53,0.34 | rot=0 | fs=1300 | text=CHAPTER 01
+P03 sp | bbox=1.60,2.72,10.13,1.05 | rot=0 | fs=4800 | text=认识 io 模块
+P03 sp | bbox=6.06,3.96,1.20,0.04 | rot=0
+P03 sp | bbox=3.60,4.30,6.13,1.50 | rot=0 | fs=1500 | text=io 模块在 Python 中扮演什么角色？ 三类 I/O 各自处理什么数据？ 为什么需要统一的流抽象？
+P04 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=OVERVIEW
+P04 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=io 是 Python 的统一流处理入口
+P04 sp | bbox=0.62,1.70,6.50,5.10 | rot=0 | fs=1500 | text=核心地位： io 模块是 Python 处理各类流（stream）的核心设施，内建函数 open() 本身就定义在 io 模块中——日常文件操作的底层实现完全由 io 提供。 三类分工： 文本 I/O 处理 str，负责编码解码与换行转换；…
+P04 sp | bbox=7.90,1.90,4.80,1.18 | rot=0
+P04 sp | bbox=8.25,2.08,4.10,0.44 | rot=0 | fs=1800 | text=文本流
+P04 sp | bbox=8.25,2.54,4.10,0.36 | rot=0 | fs=1200 | text=str · 编码与换行
+P04 sp | bbox=10.30,3.08,0.00,0.34 | rot=0
+P04 sp | bbox=10.25,3.38,0.10,0.10 | rot=0
+P04 sp | bbox=7.90,3.62,4.80,1.18 | rot=0
+P04 sp | bbox=8.25,3.80,4.10,0.44 | rot=0 | fs=1800 | text=二进制流
+P04 sp | bbox=8.25,4.26,4.10,0.36 | rot=0 | fs=1200 | text=bytes · 缓冲优化
+P04 sp | bbox=10.30,4.80,0.00,0.34 | rot=0
+P04 sp | bbox=10.25,5.10,0.10,0.10 | rot=0
+P04 sp | bbox=7.90,5.34,4.80,1.18 | rot=0
+P04 sp | bbox=8.25,5.52,4.10,0.44 | rot=0 | fs=1800 | text=原始流
+P04 sp | bbox=8.25,5.98,4.10,0.36 | rot=0 | fs=1200 | text=系统调用 · 直通内核
+P05 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=THREE CATEGORIES
+P05 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=三类 I/O 与典型代表
+P05 sp | bbox=0.80,1.85,3.83,4.75 | rot=0
+P05 sp | bbox=4.83,1.85,3.83,4.75 | rot=0
+P05 sp | bbox=8.86,1.85,3.83,4.75 | rot=0
+P05 sp | bbox=1.10,2.12,3.23,0.30 | rot=0 | fs=1200 | text=TEXT I/O
+P05 sp | bbox=5.13,2.12,3.23,0.30 | rot=0 | fs=1200 | text=BUFFERED I/O
+P05 sp | bbox=9.16,2.12,3.23,0.30 | rot=0 | fs=1200 | text=RAW I/O
+P05 sp | bbox=1.10,2.48,3.23,0.50 | rot=0 | fs=1900 | text=文本流 · str
+P05 sp | bbox=5.13,2.48,3.23,0.50 | rot=0 | fs=1900 | text=二进制缓冲流 · bytes
+P05 sp | bbox=9.16,2.48,3.23,0.50 | rot=0 | fs=1900 | text=原始流 · bytes
+P05 sp | bbox=1.10,3.12,3.23,0.00 | rot=0
+P05 sp | bbox=5.13,3.12,3.23,0.00 | rot=0
+P05 sp | bbox=9.16,3.12,3.23,0.00 | rot=0
+P05 sp | bbox=1.10,3.30,3.23,1.50 | rot=0 | fs=1300 | text=TextIOWrapper StringIO
+P05 sp | bbox=5.13,3.30,3.23,1.50 | rot=0 | fs=1300 | text=BufferedReader BufferedWriter BufferedRandom BytesIO
+P05 sp | bbox=9.16,3.30,3.23,1.50 | rot=0 | fs=1300 | text=FileIO
+P05 sp | bbox=1.10,4.95,3.23,1.50 | rot=0 | fs=1300 | text=在字节流之上完成编码 / 解码与换行符标准化转换，是日常文件读写的最外层。
+P05 sp | bbox=5.13,4.95,3.23,1.50 | rot=0 | fs=1300 | text=在原始 I/O 之上加内存缓冲区，把零散小读写合并为批量操作，减少系统调用开销。
+P05 sp | bbox=9.16,4.95,3.23,1.50 | rot=0 | fs=1300 | text=直接封装操作系统文件描述符，每次读写都对应一次系统调用，通常作为缓冲层的底层依赖。
+P06 sp | bbox=3.66,0.40,6.00,6.00 | rot=0
+P06 sp | bbox=4.50,1.24,4.32,4.32 | rot=0
+P06 sp | bbox=5.31,2.05,2.70,2.70 | rot=0
+P06 sp | bbox=2.40,2.28,8.53,0.34 | rot=0 | fs=1300 | text=CHAPTER 02
+P06 sp | bbox=1.60,2.72,10.13,1.05 | rot=0 | fs=4800 | text=底层原理
+P06 sp | bbox=6.06,3.96,1.20,0.04 | rot=0
+P06 sp | bbox=3.00,4.30,7.33,1.20 | rot=0 | fs=1500 | text=把镜头拉近到源码层面：类层次如何组织三类 I/O，缓冲层如何用内存换性能，TextIOWrapper 如何在 str 与 bytes 之间做翻译。
+P07 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=CLASS HIERARCHY
+P07 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=类层次全景 · IOBase 家族
+P07 sp | bbox=5.37,1.66,2.60,0.72 | rot=0
+P07 sp | bbox=5.37,1.66,2.60,0.72 | rot=0 | fs=1500 | text=IOBase · 根基类
+P07 sp | bbox=6.67,2.38,0.00,0.46 | rot=0
+P07 sp | bbox=2.50,2.84,8.33,0.00 | rot=0
+P07 sp | bbox=2.50,2.84,0.00,0.34 | rot=0
+P07 sp | bbox=6.67,2.84,0.00,0.34 | rot=0
+P07 sp | bbox=10.83,2.84,0.00,0.34 | rot=0
+P07 sp | bbox=0.90,3.18,3.20,0.68 | rot=0
+P07 sp | bbox=5.07,3.18,3.20,0.68 | rot=0
+P07 sp | bbox=9.23,3.18,3.20,0.68 | rot=0
+P07 sp | bbox=0.90,3.22,3.20,0.34 | rot=0 | fs=1400 | text=RawIOBase
+P07 sp | bbox=5.07,3.22,3.20,0.34 | rot=0 | fs=1400 | text=BufferedIOBase
+P07 sp | bbox=9.23,3.22,3.20,0.34 | rot=0 | fs=1400 | text=TextIOBase
+P07 sp | bbox=0.90,3.54,3.20,0.28 | rot=0 | fs=1200 | text=原始字节 · 无缓冲
+P07 sp | bbox=5.07,3.54,3.20,0.28 | rot=0 | fs=1200 | text=二进制 · 带缓冲
+P07 sp | bbox=9.23,3.54,3.20,0.28 | rot=0 | fs=1200 | text=文本 · str
+P07 sp | bbox=2.50,3.86,0.00,0.32 | rot=0
+P07 sp | bbox=6.67,3.86,0.00,0.32 | rot=0
+P07 sp | bbox=10.83,3.86,0.00,0.32 | rot=0
+P07 sp | bbox=1.40,4.18,2.20,0.56 | rot=0
+P07 sp | bbox=1.40,4.18,2.20,0.56 | rot=0 | fs=1300 | text=FileIO
+P07 sp | bbox=4.82,4.18,1.76,0.56 | rot=0
+P07 sp | bbox=4.82,4.18,1.76,0.56 | rot=0 | fs=1200 | text=BufferedReader
+P07 sp | bbox=6.72,4.18,1.76,0.56 | rot=0
+P07 sp | bbox=6.72,4.18,1.76,0.56 | rot=0 | fs=1200 | text=BufferedWriter
+P07 sp | bbox=9.73,4.18,2.20,0.56 | rot=0
+P07 sp | bbox=9.73,4.18,2.20,0.56 | rot=0 | fs=1300 | text=TextIOWrapper
+P07 sp | bbox=4.82,4.88,1.76,0.56 | rot=0
+P07 sp | bbox=4.82,4.88,1.76,0.56 | rot=0 | fs=1200 | text=BufferedRandom
+P07 sp | bbox=6.72,4.88,1.76,0.56 | rot=0
+P07 sp | bbox=6.72,4.88,1.76,0.56 | rot=0 | fs=1200 | text=BytesIO
+P07 sp | bbox=9.73,4.88,2.20,0.56 | rot=0
+P07 sp | bbox=9.73,4.88,2.20,0.56 | rot=0 | fs=1300 | text=StringIO
+P07 sp | bbox=0.80,5.90,11.73,0.00 | rot=0
+P07 sp | bbox=1.20,6.10,10.93,1.00 | rot=0 | fs=1300 | text=open() 按模式自动返回对应层的对象： 'r' → TextIOWrapper(BufferedReader(FileIO)) 'rb' → BufferedReader(FileIO) 'rb' + buffering=0 → 裸 F…
+P08 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=BUFFERING
+P08 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=为什么需要缓冲
+P08 sp | bbox=0.62,1.72,6.50,0.60 | rot=0 | fs=2400 | text=一滴一滴搬 vs 一桶一桶搬
+P08 sp | bbox=7.70,1.72,5.00,5.10 | rot=0
+P08 sp | bbox=8.00,1.95,4.40,0.30 | rot=0 | fs=1200 | text=WITHOUT BUFFERING
+P08 sp | bbox=8.15,2.42,0.56,0.20 | rot=0
+P08 sp | bbox=8.97,2.42,0.56,0.20 | rot=0
+P08 sp | bbox=9.79,2.42,0.56,0.20 | rot=0
+P08 sp | bbox=10.61,2.42,0.56,0.20 | rot=0
+P08 sp | bbox=11.43,2.42,0.56,0.20 | rot=0
+P08 sp | bbox=0.62,2.50,6.50,4.30 | rot=0 | fs=1500 | text=每次 read() / write() 最终都要穿越用户态进入内核态，触发一次系统调用——上下文切换的开销远大于内存拷贝本身。 逐字节读写 1MB 文件 = 发起一百万次系统调用，绝大部分时间花在切换而非数据传输上。 缓冲层在用户态维护一块…
+P08 sp | bbox=8.15,2.84,0.56,0.20 | rot=0
+P08 sp | bbox=8.97,2.84,0.56,0.20 | rot=0
+P08 sp | bbox=9.79,2.84,0.56,0.20 | rot=0
+P08 sp | bbox=10.61,2.84,0.56,0.20 | rot=0
+P08 sp | bbox=11.43,2.84,0.56,0.20 | rot=0
+P08 sp | bbox=8.00,3.42,4.40,0.35 | rot=0 | fs=1300 | text=逐字节 · 百万次系统调用
+P08 sp | bbox=8.00,3.98,4.40,0.00 | rot=0
+P08 sp | bbox=8.00,4.20,4.40,0.30 | rot=0 | fs=1200 | text=WITH BUFFERING
+P08 sp | bbox=8.15,4.68,4.10,0.62 | rot=0
+P08 sp | bbox=8.00,5.50,4.40,0.35 | rot=0 | fs=1300 | text=批量 · 只需少量调用
+P08 sp | bbox=8.00,6.05,4.40,0.40 | rot=0 | fs=1200 | text=read 1MB byte-by-byte：1.06s → 0.036s
+P09 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=BUFFERING MODES
+P09 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=三种缓冲模式与刷新时机
+P09 sp | bbox=0.62,1.58,6.00,0.30 | rot=0 | fs=1200 | text=open() 的 buffering 参数
+P09 tbl | bbox=0.62,1.94,12.10,1.00 | rot=0
+P09 sp | bbox=0.62,4.62,8.00,0.30 | rot=0 | fs=1200 | text=数据何时真正落盘 · 四个刷新时机
+P09 sp | bbox=5.70,4.92,1.75,0.52 | rot=0
+P09 sp | bbox=5.70,4.92,1.75,0.52 | rot=0 | fs=1200 | text=缓冲区写满
+P09 sp | bbox=7.55,4.92,1.75,0.52 | rot=0
+P09 sp | bbox=7.55,4.92,1.75,0.52 | rot=0 | fs=1200 | text=close() 关闭
+P09 sp | bbox=0.80,5.15,1.60,0.66 | rot=0
+P09 sp | bbox=0.80,5.15,1.60,0.66 | rot=0 | fs=1300 | text=write()
+P09 sp | bbox=3.10,5.15,1.90,0.66 | rot=0
+P09 sp | bbox=3.10,5.15,1.90,0.66 | rot=0 | fs=1300 | text=用户态缓冲区
+P09 sp | bbox=10.00,5.15,2.00,0.66 | rot=0
+P09 sp | bbox=10.00,5.15,2.00,0.66 | rot=0 | fs=1300 | text=磁盘存储
+P09 sp | bbox=2.50,5.48,0.50,0.00 | rot=0
+P09 sp | bbox=5.10,5.48,0.50,0.00 | rot=0
+P09 sp | bbox=9.40,5.48,0.50,0.00 | rot=0
+P09 sp | bbox=5.70,5.62,1.75,0.52 | rot=0
+P09 sp | bbox=5.70,5.62,1.75,0.52 | rot=0 | fs=1200 | text=行缓冲遇换行
+P09 sp | bbox=7.55,5.62,1.75,0.52 | rot=0
+P09 sp | bbox=7.55,5.62,1.75,0.52 | rot=0 | fs=1200 | text=手动 flush()
+P09 sp | bbox=0.80,6.45,11.70,0.50 | rot=0 | fs=1200 | text=注意：flush() ≠ 落盘——它只刷到操作系统页缓存；关键数据还需 os.fsync(f.fileno()) 强制写入物理介质。
+P10 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=TEXT LAYER
+P10 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=TextIOWrapper · 编码与换行转换
+P10 sp | bbox=8.35,1.85,4.40,0.40 | rot=0 | fs=1600 | text=① 编码转换
+P10 sp | bbox=3.15,2.30,2.50,2.30 | rot=0
+P10 sp | bbox=8.35,2.30,4.40,1.85 | rot=0 | fs=1300 | text=写入时把 str 按指定 encoding（utf-8、gbk 等）编码为 bytes 交给下层缓冲流；读取时反向解码为 str。不显式指定 encoding 时，Python 使用 locale.getpreferredencoding(…
+P10 sp | bbox=2.40,2.42,1.40,0.30 | rot=0 | fs=1200 | text=encode · 写入
+P10 sp | bbox=3.15,2.50,2.50,0.40 | rot=0 | fs=1500 | text=TextIOWrapper
+P10 sp | bbox=0.90,3.00,1.60,0.90 | rot=0
+P10 sp | bbox=0.90,3.00,1.60,0.90 | rot=0 | fs=1800 | text=str
+P10 sp | bbox=6.30,3.00,1.60,0.90 | rot=0
+P10 sp | bbox=6.30,3.00,1.60,0.90 | rot=0 | fs=1800 | text=bytes
+P10 sp | bbox=3.15,3.15,2.50,0.35 | rot=0 | fs=1200 | text=encoding='utf-8'
+P10 sp | bbox=2.55,3.26,0.55,0.00 | rot=0
+P10 sp | bbox=5.70,3.26,0.55,0.00 | rot=0
+P10 sp | bbox=3.15,3.55,2.50,0.35 | rot=0 | fs=1200 | text=newline=None
+P10 sp | bbox=2.55,3.64,0.55,0.00 | rot=0
+P10 sp | bbox=5.70,3.64,0.55,0.00 | rot=0
+P10 sp | bbox=2.40,4.05,1.40,0.30 | rot=0 | fs=1200 | text=decode · 读取
+P10 sp | bbox=8.35,4.25,4.40,0.40 | rot=0 | fs=1600 | text=② 换行符转换
+P10 sp | bbox=8.35,4.70,4.40,1.60 | rot=0 | fs=1300 | text=读取时 newline=None 启用通用换行模式：\n、\r\n、\r 统一转为 \n；写入时 newline=None 把 \n 转为 os.linesep（Windows 即 \r\n）；newline='' 或 '\n' 则原样透传…
+P10 sp | bbox=0.90,4.85,7.00,0.80 | rot=0 | fs=1300 | text=文本层包裹在缓冲层之外：str ⇄ bytes 的双向翻译官
+P10 sp | bbox=8.35,6.50,4.40,0.40 | rot=0 | fs=1200 | text=生产代码务必显式 encoding='utf-8'
+P11 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=A WRITE'S JOURNEY
+P11 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=一次 write 的完整旅程
+P11 sp | bbox=1.38,2.38,0.42,0.42 | rot=0
+P11 sp | bbox=1.38,2.38,0.42,0.42 | rot=0 | fs=1400 | text=1
+P11 sp | bbox=3.38,2.38,0.42,0.42 | rot=0
+P11 sp | bbox=3.38,2.38,0.42,0.42 | rot=0 | fs=1400 | text=2
+P11 sp | bbox=5.38,2.38,0.42,0.42 | rot=0
+P11 sp | bbox=5.38,2.38,0.42,0.42 | rot=0 | fs=1400 | text=3
+P11 sp | bbox=7.39,2.38,0.42,0.42 | rot=0
+P11 sp | bbox=7.39,2.38,0.42,0.42 | rot=0 | fs=1400 | text=4
+P11 sp | bbox=9.39,2.38,0.42,0.42 | rot=0
+P11 sp | bbox=9.39,2.38,0.42,0.42 | rot=0 | fs=1400 | text=5
+P11 sp | bbox=11.40,2.38,0.42,0.42 | rot=0
+P11 sp | bbox=11.40,2.38,0.42,0.42 | rot=0 | fs=1400 | text=6
+P11 sp | bbox=1.58,2.59,10.03,0.00 | rot=0
+P11 sp | bbox=0.62,2.98,1.93,2.35 | rot=0
+P11 sp | bbox=2.62,2.98,1.93,2.35 | rot=0
+P11 sp | bbox=4.63,2.98,1.93,2.35 | rot=0
+P11 sp | bbox=6.63,2.98,1.93,2.35 | rot=0
+P11 sp | bbox=8.64,2.98,1.93,2.35 | rot=0
+P11 sp | bbox=10.64,2.98,1.93,2.35 | rot=0
+P11 sp | bbox=0.74,3.14,1.69,0.45 | rot=0 | fs=1400 | text=write() 调用
+P11 sp | bbox=2.75,3.14,1.69,0.45 | rot=0 | fs=1400 | text=编码与换行
+P11 sp | bbox=4.75,3.14,1.69,0.45 | rot=0 | fs=1400 | text=进入缓冲区
+P11 sp | bbox=6.75,3.14,1.69,0.45 | rot=0 | fs=1400 | text=系统调用
+P11 sp | bbox=8.76,3.14,1.69,0.45 | rot=0 | fs=1400 | text=页缓存
+P11 sp | bbox=10.77,3.14,1.69,0.45 | rot=0 | fs=1400 | text=落盘
+P11 sp | bbox=0.76,3.62,1.65,1.60 | rot=0 | fs=1200 | text=Python 代码调用 TextIOWrapper.write()
+P11 sp | bbox=2.77,3.62,1.65,1.60 | rot=0 | fs=1200 | text=按 encoding 编码为 bytes，并按 newline 参数做换行转换
+P11 sp | bbox=4.77,3.62,1.65,1.60 | rot=0 | fs=1200 | text=bytes 写入 BufferedWriter 的内存缓冲区，尚未触及磁盘
+P11 sp | bbox=6.78,3.62,1.65,1.60 | rot=0 | fs=1200 | text=缓冲区满或 flush() 时，经 FileIO 发起 OS write() 调用
+P11 sp | bbox=8.78,3.62,1.65,1.60 | rot=0 | fs=1200 | text=数据进入操作系统页缓存，对程序而言已写完
+P11 sp | bbox=10.79,3.62,1.65,1.60 | rot=0 | fs=1200 | text=内核择机将脏页刷入物理存储，fsync() 可强制同步
+P11 sp | bbox=2.40,5.62,8.53,0.60 | rot=0 | fs=2200 | text=你的一次 write，穿越了四层抽象
+P11 sp | bbox=6.16,6.32,1.00,0.04 | rot=0
+P11 sp | bbox=1.60,6.52,10.13,0.50 | rot=0 | fs=1200 | text=文本层只管编码与换行，缓冲层只管批量化，原始层只管系统调用——彼此独立、可替换
+P12 sp | bbox=3.66,0.40,6.00,6.00 | rot=0
+P12 sp | bbox=4.50,1.24,4.32,4.32 | rot=0
+P12 sp | bbox=5.31,2.05,2.70,2.70 | rot=0
+P12 sp | bbox=2.40,2.28,8.53,0.34 | rot=0 | fs=1300 | text=CHAPTER 03
+P12 sp | bbox=1.60,2.72,10.13,1.05 | rot=0 | fs=4800 | text=应用实战
+P12 sp | bbox=6.06,3.96,1.20,0.04 | rot=0
+P12 sp | bbox=3.00,4.30,7.33,0.90 | rot=0 | fs=1500 | text=文件、内存与标准流——io 大显身手的三类真实场景。
+P13 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=FILE I/O IN PRACTICE
+P13 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=文件读写实战 · open 与 with
+P13 sp | bbox=0.80,1.80,6.00,4.90 | rot=0
+P13 sp | bbox=7.35,1.90,5.20,0.32 | rot=0 | fs=1300 | text=WITH
+P13 sp | bbox=1.10,2.02,5.40,0.30 | rot=0 | fs=1200 | text=READ & WRITE · WITH OPEN
+P13 sp | bbox=7.35,2.26,5.20,0.82 | rot=0 | fs=1300 | text=离开代码块自动关闭，即使发生异常也不会泄漏文件句柄。
+P13 sp | bbox=1.10,2.45,5.40,4.00 | rot=0 | fs=1300 | text=# 读取：逐行迭代，内存友好 with open("data.txt", "r", encoding="utf-8") as f: for line in f: process(line) # 写入：覆盖模式 with open("log.…
+P13 sp | bbox=7.35,3.04,5.20,0.00 | rot=0
+P13 sp | bbox=7.35,3.14,5.20,0.32 | rot=0 | fs=1300 | text=MODE
+P13 sp | bbox=7.35,3.50,5.20,0.82 | rot=0 | fs=1300 | text=r 读 / w 写并截断 / a 追加 / x 独占创建；加 b 切换二进制，加 + 开启读写。
+P13 sp | bbox=7.35,4.28,5.20,0.00 | rot=0
+P13 sp | bbox=7.35,4.38,5.20,0.32 | rot=0 | fs=1300 | text=ENCODING
+P13 sp | bbox=7.35,4.74,5.20,0.82 | rot=0 | fs=1300 | text=文本模式务必显式 encoding='utf-8'，否则默认编码随操作系统而变，跨平台易乱码。
+P13 sp | bbox=7.35,5.52,5.20,0.00 | rot=0
+P13 sp | bbox=7.35,5.62,5.20,0.32 | rot=0 | fs=1300 | text=BUFFERING
+P13 sp | bbox=7.35,5.98,5.20,0.82 | rot=0 | fs=1300 | text=0 无缓冲（仅二进制）/ 1 行缓冲（仅文本）/ >1 指定字节数 / -1 默认 128KB。
+P14 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=IN-MEMORY STREAMS
+P14 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=内存流 · StringIO 与 BytesIO
+P14 sp | bbox=0.80,1.85,5.40,3.35 | rot=0
+P14 sp | bbox=7.13,1.85,5.40,3.35 | rot=0
+P14 sp | bbox=1.10,2.05,4.80,0.50 | rot=0 | fs=2200 | text=StringIO
+P14 sp | bbox=7.43,2.05,4.80,0.50 | rot=0 | fs=2200 | text=BytesIO
+P14 sp | bbox=1.10,2.58,4.80,0.35 | rot=0 | fs=1300 | text=内存中的文本流 · 处理 str
+P14 sp | bbox=7.43,2.58,4.80,0.35 | rot=0 | fs=1300 | text=内存中的二进制流 · 处理 bytes
+P14 sp | bbox=1.10,3.15,4.80,1.90 | rot=0 | fs=1300 | text=构造后即可 write() / read() / seek() / tell() getvalue() 一次性取出全部文本内容 适合文本数据的内存操作：拼接、捕获、模板生成
+P14 sp | bbox=7.43,3.15,4.80,1.90 | rot=0 | fs=1300 | text=可用 bytes 初始化内容：BytesIO(b"...") 同样支持完整文件接口：读写、seek、tell 适合二进制数据：图片、zip、网络载荷
+P14 sp | bbox=6.42,3.30,0.50,0.50 | rot=0
+P14 sp | bbox=6.42,3.30,0.50,0.50 | rot=0 | fs=1400 | text=VS
+P14 sp | bbox=0.80,5.55,11.73,1.15 | rot=0
+P14 sp | bbox=1.20,5.62,10.93,1.00 | rot=0 | fs=1400 | text=共同点 · 内存中的文件： 无需磁盘 I/O · 完整实现 IOBase 接口 · 可作为任何接受文件对象的函数的输入输出
+P15 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=USE CASES
+P15 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=内存流 · 四个实战场景
+P15 sp | bbox=0.80,1.80,5.73,2.30 | rot=0
+P15 sp | bbox=6.80,1.80,5.73,2.30 | rot=0
+P15 sp | bbox=1.10,2.10,0.46,0.46 | rot=0
+P15 sp | bbox=1.10,2.10,0.46,0.46 | rot=0 | fs=1500 | text=1
+P15 sp | bbox=1.75,2.10,4.50,0.50 | rot=0 | fs=1600 | text=单元测试模拟文件
+P15 sp | bbox=7.10,2.10,0.46,0.46 | rot=0
+P15 sp | bbox=7.10,2.10,0.46,0.46 | rot=0 | fs=1500 | text=2
+P15 sp | bbox=7.75,2.10,4.50,0.50 | rot=0 | fs=1600 | text=捕获 print 输出
+P15 sp | bbox=1.12,2.78,5.10,1.20 | rot=0 | fs=1300 | text=把 BytesIO 传给需要文件对象的函数（json.load、csv.reader），无需创建临时文件，测试更干净、更快速。
+P15 sp | bbox=7.12,2.78,5.10,1.20 | rot=0 | fs=1300 | text=用 contextlib.redirect_stdout(StringIO()) 将标准输出重定向到内存流，收集内容后直接做断言。
+P15 sp | bbox=0.80,4.30,5.73,2.30 | rot=0
+P15 sp | bbox=6.80,4.30,5.73,2.30 | rot=0
+P15 sp | bbox=1.10,4.60,0.46,0.46 | rot=0
+P15 sp | bbox=1.10,4.60,0.46,0.46 | rot=0 | fs=1500 | text=3
+P15 sp | bbox=1.75,4.60,4.50,0.50 | rot=0 | fs=1600 | text=高效拼接大量字符串
+P15 sp | bbox=7.10,4.60,0.46,0.46 | rot=0
+P15 sp | bbox=7.10,4.60,0.46,0.46 | rot=0 | fs=1500 | text=4
+P15 sp | bbox=7.75,4.60,4.50,0.50 | rot=0 | fs=1600 | text=数据格式中转站
+P15 sp | bbox=1.12,5.28,5.10,1.20 | rot=0 | fs=1300 | text=循环 write() 再 getvalue()，避免 += 反复分配临时对象；万级行数的拼接场景性能提升显著。
+P15 sp | bbox=7.12,5.28,5.10,1.20 | rot=0 | fs=1300 | text=zipfile.ZipFile(BytesIO(), 'w')、csv.writer(StringIO()) 直接在内存生成结构化数据，用于网络上传、API 响应、邮件附件，全程不落盘。
+P16 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=STANDARD STREAMS
+P16 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=标准流与输出重定向
+P16 sp | bbox=0.80,1.72,3.90,1.30 | rot=0
+P16 sp | bbox=4.91,1.72,3.90,1.30 | rot=0
+P16 sp | bbox=9.02,1.72,3.90,1.30 | rot=0
+P16 sp | bbox=1.10,1.88,3.30,0.40 | rot=0 | fs=1600 | text=sys.stdin
+P16 sp | bbox=5.21,1.88,3.30,0.40 | rot=0 | fs=1600 | text=sys.stdout
+P16 sp | bbox=9.32,1.88,3.30,0.40 | rot=0 | fs=1600 | text=sys.stderr
+P16 sp | bbox=1.10,2.34,3.30,0.55 | rot=0 | fs=1300 | text=标准输入 · 文本流，默认读取键盘输入
+P16 sp | bbox=5.21,2.34,3.30,0.55 | rot=0 | fs=1300 | text=标准输出 · 行缓冲，print() 的写入目标
+P16 sp | bbox=9.32,2.34,3.30,0.55 | rot=0 | fs=1300 | text=标准错误 · 错误信息即时可见
+P16 sp | bbox=0.80,3.35,7.00,2.55 | rot=0
+P16 sp | bbox=8.15,3.45,4.55,2.50 | rot=0 | fs=1300 | text=print(..., file=某流) 可把输出写到任意文件对象，包括内存流 redirect_stdout 在 with 块内整体捕获一段代码的全部 print 输出，常用于测试断言 print(..., flush=True) 立即刷新…
+P16 sp | bbox=1.10,3.55,6.40,2.20 | rot=0 | fs=1300 | text=import io, contextlib buf = io.StringIO() with contextlib.redirect_stdout(buf): print("hello io") assert buf.getvalue() …
+P16 sp | bbox=0.80,6.25,11.73,0.50 | rot=0 | fs=1200 | text=print() 的本质：向 sys.stdout.write() 写入文本再刷新——三个标准流都是 io 体系的 TextIOWrapper 对象
+P17 sp | bbox=3.66,0.40,6.00,6.00 | rot=0
+P17 sp | bbox=4.50,1.24,4.32,4.32 | rot=0
+P17 sp | bbox=5.31,2.05,2.70,2.70 | rot=0
+P17 sp | bbox=2.40,2.28,8.53,0.34 | rot=0 | fs=1300 | text=CHAPTER 04
+P17 sp | bbox=1.60,2.72,10.13,1.05 | rot=0 | fs=4800 | text=性能与最佳实践
+P17 sp | bbox=6.06,3.96,1.20,0.04 | rot=0
+P17 sp | bbox=3.00,4.30,7.33,0.90 | rot=0 | fs=1500 | text=让数字说话：实测性能对比、大文件处理与避坑清单。
+P18 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=BENCHMARK · MEASURED
+P18 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=性能对比 · 缓冲带来的差距
+P18 chrt | bbox=0.62,1.75,7.00,4.60 | rot=0 | ref=chart1.xml
+P18 sp | bbox=8.10,1.75,4.60,2.00 | rot=0
+P18 sp | bbox=8.40,1.95,2.40,0.90 | rot=0 | fs=4400 | text=29.5×
+P18 sp | bbox=10.70,2.05,1.80,0.40 | rot=0 | fs=1500 | text=读取提速
+P18 sp | bbox=10.70,2.48,1.90,0.40 | rot=0 | fs=1200 | text=1.06s → 0.036s
+P18 sp | bbox=8.10,3.95,4.60,2.00 | rot=0
+P18 sp | bbox=8.40,4.15,2.40,0.90 | rot=0 | fs=4400 | text=48.6×
+P18 sp | bbox=10.70,4.25,1.80,0.40 | rot=0 | fs=1500 | text=写入提速
+P18 sp | bbox=10.70,4.68,1.90,0.40 | rot=0 | fs=1200 | text=4.00s → 0.082s
+P18 sp | bbox=8.10,6.10,4.60,0.60 | rot=0 | fs=1400 | text=仅加一层缓冲，同样的操作快了一个数量级
+P18 sp | bbox=0.62,6.85,12.10,0.35 | rot=0 | fs=1200 | text=测试条件：Python 3.14.6 · 1MB 文件 · 逐字节读写 · 本机 SSD 实测
+P19 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=LARGE FILES
+P19 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=大文件的正确打开方式
+P19 sp | bbox=0.80,1.80,5.90,4.10 | rot=0
+P19 sp | bbox=6.93,1.80,5.90,4.10 | rot=0
+P19 sp | bbox=1.10,2.00,5.30,0.45 | rot=0 | fs=1700 | text=反例 · 一次性读入
+P19 sp | bbox=7.23,2.00,5.30,0.45 | rot=0 | fs=1700 | text=正解 · 流式处理
+P19 sp | bbox=1.10,2.55,5.30,1.35 | rot=0 | fs=1300 | text=f.read() 把整个文件读进一个字符串——文件多大，内存就吃多大； f.readlines() 生成包含所有行的完整列表，内存占用同样随文件大小膨胀。
+P19 sp | bbox=7.23,2.55,5.30,1.35 | rot=0 | fs=1300 | text=for line in f 惰性迭代——每次只在内存保留一行，占用恒定 O(1)； 二进制大文件分块读取，每块 64KB，边读边写实现流式复制。
+P19 sp | bbox=1.10,4.15,5.30,1.30 | rot=0 | fs=1300 | text=content = f.read() # 全部读入 lines = f.readlines() # 建完整列表
+P19 sp | bbox=7.23,4.15,5.30,1.55 | rot=0 | fs=1300 | text=for line in f: # 惰性迭代 process(line) while chunk := f.read(65536): # 分块读 out.write(chunk)
+P19 sp | bbox=0.80,6.15,12.03,0.75 | rot=0
+P19 sp | bbox=0.80,6.15,12.03,0.75 | rot=0 | fs=1500 | text=核心原则：永远不要让文件大小决定内存峰值——内存占用 O(1) 而非 O(n)
+P20 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=PITFALLS & BEST PRACTICES
+P20 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=常见陷阱与最佳实践清单
+P20 sp | bbox=0.80,1.62,5.90,0.40 | rot=0 | fs=1600 | text=常见陷阱
+P20 sp | bbox=7.23,1.62,5.60,0.40 | rot=0 | fs=1600 | text=对策
+P20 sp | bbox=6.93,1.65,0.00,5.10 | rot=0
+P20 sp | bbox=0.80,2.20,5.90,0.86 | rot=0 | fs=1300 | text=忘记 close 资源泄漏、未刷新的数据丢失
+P20 sp | bbox=7.50,2.20,5.30,0.86 | rot=0 | fs=1300 | text=永远用 with 语句，自动关闭文件
+P20 sp | bbox=7.23,2.32,0.10,0.10 | rot=0
+P20 sp | bbox=0.80,3.14,12.03,0.00 | rot=0
+P20 sp | bbox=0.80,3.20,5.90,0.86 | rot=0 | fs=1300 | text=忘写 encoding 默认编码随平台而变，跨机器乱码
+P20 sp | bbox=7.50,3.20,5.30,0.86 | rot=0 | fs=1300 | text=文本模式显式 encoding='utf-8'
+P20 sp | bbox=7.23,3.32,0.10,0.10 | rot=0
+P20 sp | bbox=0.80,4.14,12.03,0.00 | rot=0
+P20 sp | bbox=0.80,4.20,5.90,0.86 | rot=0 | fs=1300 | text=文本与二进制模式混淆 文本流不能传 bytes，二进制流不能传 str
+P20 sp | bbox=7.50,4.20,5.30,0.86 | rot=0 | fs=1300 | text=按数据类型选择 t / b 模式
+P20 sp | bbox=7.23,4.32,0.10,0.10 | rot=0
+P20 sp | bbox=0.80,5.14,12.03,0.00 | rot=0
+P20 sp | bbox=0.80,5.20,5.90,0.86 | rot=0 | fs=1300 | text=文本模式传 buffering=0 直接抛出 ValueError
+P20 sp | bbox=7.50,5.20,5.30,0.86 | rot=0 | fs=1300 | text=无缓冲仅限二进制；文本用 1 行缓冲或 >1 全缓冲
+P20 sp | bbox=7.23,5.32,0.10,0.10 | rot=0
+P20 sp | bbox=0.80,6.14,12.03,0.00 | rot=0
+P20 sp | bbox=0.80,6.20,5.90,0.86 | rot=0 | fs=1300 | text=以为 flush() 即落盘 只刷到 OS 页缓存，断电仍可能丢数据
+P20 sp | bbox=7.50,6.20,5.30,0.86 | rot=0 | fs=1300 | text=关键数据 flush() 后再调 os.fsync()
+P20 sp | bbox=7.23,6.32,0.10,0.10 | rot=0
+P21 sp | bbox=0.62,0.42,9.00,0.30 | rot=0 | fs=1200 | text=RECAP
+P21 sp | bbox=0.60,0.74,12.10,0.62 | rot=0 | fs=2700 | text=要点回顾 · 六个关键收获
+P21 sp | bbox=0.80,1.72,5.73,1.60 | rot=0
+P21 sp | bbox=6.80,1.72,5.73,1.60 | rot=0
+P21 sp | bbox=1.06,1.98,0.42,0.42 | rot=0
+P21 sp | bbox=1.06,1.98,0.42,0.42 | rot=0 | fs=1400 | text=1
+P21 sp | bbox=1.65,1.98,4.60,0.42 | rot=0 | fs=1500 | text=统一流入口
+P21 sp | bbox=7.06,1.98,0.42,0.42 | rot=0
+P21 sp | bbox=7.06,1.98,0.42,0.42 | rot=0 | fs=1400 | text=2
+P21 sp | bbox=7.65,1.98,4.60,0.42 | rot=0 | fs=1500 | text=类层次三线
+P21 sp | bbox=1.08,2.50,5.20,0.75 | rot=0 | fs=1200 | text=open() 就定义在 io 模块；文本 / 二进制 / 原始三类 I/O 各司其职，覆盖字符串到系统调用的完整链路。
+P21 sp | bbox=7.08,2.50,5.20,0.75 | rot=0 | fs=1200 | text=IOBase 分出 Raw / Buffered / Text 三条支线，open() 按 mode 自动组装对应对象。
+P21 sp | bbox=0.80,3.50,5.73,1.60 | rot=0
+P21 sp | bbox=6.80,3.50,5.73,1.60 | rot=0
+P21 sp | bbox=1.06,3.76,0.42,0.42 | rot=0
+P21 sp | bbox=1.06,3.76,0.42,0.42 | rot=0 | fs=1400 | text=3
+P21 sp | bbox=1.65,3.76,4.60,0.42 | rot=0 | fs=1500 | text=缓冲即批量
+P21 sp | bbox=7.06,3.76,0.42,0.42 | rot=0
+P21 sp | bbox=7.06,3.76,0.42,0.42 | rot=0 | fs=1400 | text=4
+P21 sp | bbox=7.65,3.76,4.60,0.42 | rot=0 | fs=1500 | text=编码与换行
+P21 sp | bbox=1.08,4.28,5.20,0.75 | rot=0 | fs=1200 | text=把昂贵的系统调用合并为批量操作，默认缓冲区 128KB，buffering 参数切换三种策略。
+P21 sp | bbox=7.08,4.28,5.20,0.75 | rot=0 | fs=1200 | text=TextIOWrapper 负责 str ⇄ bytes 与换行规范化，务必显式 encoding='utf-8'。
+P21 sp | bbox=0.80,5.28,5.73,1.60 | rot=0
+P21 sp | bbox=6.80,5.28,5.73,1.60 | rot=0
+P21 sp | bbox=1.06,5.54,0.42,0.42 | rot=0
+P21 sp | bbox=1.06,5.54,0.42,0.42 | rot=0 | fs=1400 | text=5
+P21 sp | bbox=1.65,5.54,4.60,0.42 | rot=0 | fs=1500 | text=内存流双雄
+P21 sp | bbox=7.06,5.54,0.42,0.42 | rot=0
+P21 sp | bbox=7.06,5.54,0.42,0.42 | rot=0 | fs=1400 | text=6
+P21 sp | bbox=7.65,5.54,4.60,0.42 | rot=0 | fs=1500 | text=实测提速
+P21 sp | bbox=1.08,6.06,5.20,0.75 | rot=0 | fs=1200 | text=StringIO / BytesIO 是内存中的文件：测试模拟、输出捕获、字符串拼接、数据中转。
+P21 sp | bbox=7.08,6.06,5.20,0.75 | rot=0 | fs=1200 | text=缓冲带来数十倍提速；大文件用逐行迭代或分块读取，别让文件大小决定内存峰值。
+P22 sp | bbox=3.46,-0.50,6.40,6.40 | rot=0
+P22 sp | bbox=10.23,0.14,2.90,0.34 | rot=0 | fs=1200 | text=千问AI生成
+P22 sp | bbox=4.36,0.40,4.61,4.61 | rot=0
+P22 sp | bbox=5.22,1.26,2.88,2.88 | rot=0
+P22 sp | bbox=1.40,2.15,10.53,0.95 | rot=0 | fs=3400 | text=理解流的三层抽象，读写从此心中有数
+P22 sp | bbox=6.06,3.25,1.20,0.04 | rot=0
+P22 sp | bbox=3.40,3.75,6.53,0.40 | rot=0 | fs=1300 | text=动手练习
+P22 sp | bbox=3.10,4.20,7.13,1.80 | rot=0 | fs=1400 | text=用 io.StringIO + redirect_stdout 捕获一段 print 输出并断言内容 对 1MB 文件分别用 FileIO 与 BufferedReader 逐字节读取计时，亲手验证缓冲提速 用 BytesIO + zipf…
+P22 sp | bbox=2.40,6.50,8.53,0.40 | rot=0 | fs=1200 | text=PYTHON IO DEEP DIVE · THANKS FOR WATCHING

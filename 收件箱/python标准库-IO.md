@@ -51,8 +51,6 @@ f = open("myfile.jpg", "rb", buffering=0)
 
 警告
 
- 
-
 Raw I/O is a low-level interface and methods generally must have their return values checked and be explicitly retried to ensure an operation completes. For instance [`write()`](https://docs.python.org/zh-cn/3.14/library/io.html#io.RawIOBase.write "io.RawIOBase.write") returns the number of bytes written which may be less than the number of bytes provided (a partial write). High-level I/O objects like [二进制 I/O](https://docs.python.org/zh-cn/3.14/library/io.html#binary-io) and [文本 I/O](https://docs.python.org/zh-cn/3.14/library/io.html#text-io) implement retry behavior.
 
 ## 文本编码格式[](https://docs.python.org/zh-cn/3.14/library/io.html#text-encoding "Link to this heading")
@@ -61,7 +59,7 @@ Raw I/O is a low-level interface and methods generally must have their return va
 
 但是，很多开发者在打开以 UTF-8 编码的文本文件 (例如 JSON, TOML, Markdown 等等...) 时会忘记指定编码格式，因为大多数 Unix 平台默认使用 UTF-8 语言区域。 这会导致各种错误因为大多数 Windows 用户的语言区域编码格式并不是 UTF-8。 例如:
 
-# 当文件中有非 ASCII 字符时可能无法在 Windows 下使用。
+当文件中有非 ASCII 字符时可能无法在 Windows 下使用。
 with open("README.md") as f:
     long_description = f.read()
 
