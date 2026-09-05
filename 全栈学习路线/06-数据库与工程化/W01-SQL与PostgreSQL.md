@@ -22,25 +22,25 @@ created: 2026-06-19
 
 **类比**：把数据库想成"加了安全员的超大版 Excel"。
 
-| 普通 Excel | 数据库 |
-|---|---|
-| 双击打开，谁都能改 | 必须用账号密码连 |
+| 普通 Excel   | 数据库          |
+| ---------- | ------------ |
+| 双击打开，谁都能改  | 必须用账号密码连     |
 | 改坏了 Ctrl+Z | 事务 + 备份 + 日志 |
-| 几万行就卡 | 几亿行还能毫秒查 |
-| 不能多人同时改 | 锁机制保证并发安全 |
-| 没有"关系" | 表与表之间用外键关联 |
+| 几万行就卡      | 几亿行还能毫秒查     |
+| 不能多人同时改    | 锁机制保证并发安全    |
+| 没有"关系"     | 表与表之间用外键关联   |
 
 **关系型 vs NoSQL**：
 
-| 维度 | 关系型 (PostgreSQL/MySQL) | NoSQL (MongoDB/Redis) |
-|---|---|---|
-| 数据模型 | 表 + 行 + 列，有 schema | 文档 / 键值 / 列族 / 图 |
-| 一致性 | 强一致，事务 ACID | 大多最终一致 |
-| 扩展 | 垂直为主，分库分表麻烦 | 天然横向扩展 |
-| 查询 | SQL，表达力极强 | 各家自定，复杂查询难 |
-| 适合 | 业务系统、报表、金融 | 日志、缓存、海量 KV |
+| 维度   | 关系型 (PostgreSQL/MySQL) | NoSQL (MongoDB/Redis) |
+| ---- | ---------------------- | --------------------- |
+| 数据模型 | 表 + 行 + 列，有 schema     | 文档 / 键值 / 列族 / 图      |
+| 一致性  | **强一致，事务 ACID**        | 大多最终一致                |
+| 扩展   | 垂直为主，分库分表麻烦            | 天然横向扩展                |
+| 查询   | SQL，表达力极强              | 各家自定，复杂查询难            |
+| 适合   | 业务系统、报表、金融             | 日志、缓存、海量 KV           |
 
-**结论**：90% 的项目首选 PostgreSQL，必要时再加 Redis 缓存、Elasticsearch 搜索、MongoDB 存 schemaless 数据。
+**结论**：**90% 的项目首选 PostgreSQL**，**必要时再加 Redis 缓存、Elasticsearch 搜索、MongoDB 存 schemaless 数据。**
 
 ---
 
@@ -64,17 +64,17 @@ docker exec -it pg psql -U dev -d playground
 
 **psql 必会命令**：
 
-| 命令 | 作用 |
-|---|---|
-| `\l` | 列出所有库 |
-| `\c playground` | 切到某库 |
-| `\dt` | 列出表 |
-| `\d users` | 看表结构 |
-| `\df` | 列函数 |
-| `\du` | 列用户 |
-| `\timing on` | 显示耗时 |
-| `\x` | 切换横竖显示 |
-| `\q` | 退出 |
+| 命令              | 作用     |
+| --------------- | ------ |
+| `\l`            | 列出所有库  |
+| `\c playground` | 切到某库   |
+| `\dt`           | 列出表    |
+| `\d users`      | 看表结构   |
+| `\df`           | 列函数    |
+| `\du`           | 列用户    |
+| `\timing on`    | 显示耗时   |
+| `\x`            | 切换横竖显示 |
+| `\q`            | 退出     |
 
 **图形客户端**：DBeaver（免费，全能）、TablePlus（颜值高，付费）、pgAdmin（官方）。
 
@@ -82,20 +82,20 @@ docker exec -it pg psql -U dev -d playground
 
 ## 四、数据类型速查
 
-| 类型 | 说明 | 示例 |
-|---|---|---|
-| `integer` / `int` | 32 位整数 | `42` |
-| `bigint` | 64 位 | 大流水号 |
-| `numeric(10,2)` | 精确小数（钱必须用） | `199.99` |
-| `real` / `double precision` | 浮点（有精度问题） | 科学计算 |
-| `text` | 不限长度字符串 | 文章正文 |
-| `varchar(n)` | 限长字符串 | 用户名 |
-| `boolean` | true / false | 是否激活 |
-| `date` | 年月日 | `2026-06-19` |
-| `timestamp` / `timestamptz` | 时间戳，**带时区版本**优先 | `now()` |
-| `uuid` | 全局唯一 ID | `gen_random_uuid()` |
-| `jsonb` | 二进制 JSON，可索引 | `{"a":1}` |
-| `text[]` | 数组 | `ARRAY['a','b']` |
+| 类型                          | 说明              | 示例                  |
+| --------------------------- | --------------- | ------------------- |
+| `integer` / `int`           | 32 位整数          | `42`                |
+| `bigint`                    | 64 位            | 大流水号                |
+| `numeric(10,2)`             | 精确小数（钱必须用）      | `199.99`            |
+| `real` / `double precision` | 浮点（有精度问题）       | 科学计算                |
+| `text`                      | 不限长度字符串         | 文章正文                |
+| `varchar(n)`                | 限长字符串           | 用户名                 |
+| `boolean`                   | true / false    | 是否激活                |
+| `date`                      | 年月日             | `2026-06-19`        |
+| `timestamp` / `timestamptz` | 时间戳，**带时区版本**优先 | `now()`             |
+| `uuid`                      | 全局唯一 ID         | `gen_random_uuid()` |
+| `jsonb`                     | 二进制 JSON，可索引    | `{"a":1}`           |
+| `text[]`                    | 数组              | `ARRAY['a','b']`    |
 
 **踩坑**：
 - 钱**永远不用 float**，用 `numeric`
@@ -375,3 +375,5 @@ REFRESH MATERIALIZED VIEW CONCURRENTLY mv_daily_stats;
 - [ ] LeetCode SQL 通过 ≥ 30 道
 
 下一周进入索引、事务、锁——把"会写 SQL"升级成"会写**快**的 SQL"。
+
+> 扩展阅读：用 Python 连 PostgreSQL？见 [[psycopg3-Python-PostgreSQL驱动使用手册]]（psycopg 3 最新用法：同步/异步/连接池/从 psycopg2 迁移速查）。
