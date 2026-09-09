@@ -26,9 +26,12 @@ event_loop.run_forever()
 
 ### 异步函数和协程
 
+这是一个基本的、无趣的 Python 函数， 调用一个普通函数会执行它的逻辑或函数体。 
+与普通的 `def` 不同，[async def](https://docs.python.org/zh-cn/3.14/reference/compound_stmts.html#async-def) 使它成为一个异步函数（或“协程函数”）。调用它会创建并返回一个 [协程](https://docs.python.org/zh-cn/3.14/library/asyncio-task.html#coroutine) 对象。
 
-
+协程代表函数体或逻辑。协程必须显式启动；再次强调，仅仅创建协程并不能启动它。值得注意的是，协程可以在函数体的不同位置暂停和恢复。这种暂停和恢复能力使得异步行为成为可能！
 
 
 ### 任务
 
+粗略地说，[任务](https://docs.python.org/zh-cn/3.14/library/asyncio-task.html#asyncio-task-obj) 是绑定到事件循环的协程（而非协程函数）。任务还维护一个回调函数列表，这些回调函数的重要性在稍后讨论 [`await`](https://docs.python.org/zh-cn/3.14/reference/expressions.html#await) 时会更加清晰。推荐使用 [`asyncio.create_task()`](https://docs.python.org/zh-cn/3.14/library/asyncio-task.html#asyncio.create_task "asyncio.create_task") 创建任务。
