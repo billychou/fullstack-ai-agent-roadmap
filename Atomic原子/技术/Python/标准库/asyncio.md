@@ -86,7 +86,7 @@ event_loop.run_forever()
 粗略地说，[任务](https://docs.python.org/zh-cn/3.14/library/asyncio-task.html#asyncio-task-obj) 是绑定到事件循环的协程（而非协程函数）。任务还维护一个回调函数列表，这些回调函数的重要性在稍后讨论 [`await`](https://docs.python.org/zh-cn/3.14/reference/expressions.html#await) 时会更加清晰。推荐使用 [`asyncio.create_task()`](https://docs.python.org/zh-cn/3.14/library/asyncio-task.html#asyncio.create_task "asyncio.create_task") 创建任务。
 
 
-### 核心细节与运作机制[¶](https://docs.python.org/zh-cn/3.14/howto/a-conceptual-overview-of-asyncio.html#a-conceptual-overview-part-2-the-nuts-and-bolts "Link to this heading")
+### 核心细节与运作机制[](https://docs.python.org/zh-cn/3.14/howto/a-conceptual-overview-of-asyncio.html#a-conceptual-overview-part-2-the-nuts-and-bolts)
 
 本部分详细介绍 `asyncio` 用于管理控制流的机制。这正是魔法发生的地方。读完本节后，您将了解 `await` 在幕后做了什么，以及如何创建您自己的异步运算符。
 
@@ -123,12 +123,13 @@ except StopIteration as e:
 print(f"Coroutine main() finished and provided value: {returned_value}.")
 ```
 
-[yield](https://docs.python.org/zh-cn/3.14/reference/expressions.html#yieldexpr) 像往常一样暂停执行并将控制权返回给调用者。在上面的例子中，第 3 行的 `yield` 被第 11 行的 `... = await rock` 调用。更宽泛地说，`await` 会调用给定对象的 [`__await__()`](https://docs.python.org/zh-cn/3.14/reference/datamodel.html#object.__await__ "object.__await__") 方法。`await` 还会做一件非常特别的事情：它会将接收到的任何 `yield` 沿着调用链向上传播（或称“传递”）。在本例中，这将回到第 16 行的 `... = coroutine.send(None)`。
+[yield](https://docs.python.org/zh-cn/3.14/reference/expressions.html#yieldexpr)像往常一样暂停执行并将控制权返回给调用者。在上面的例子中，第 3 行的 `yield` 被第 11 行的 `... = await rock` 调用。更宽泛地说，`await` 会调用给定对象的 [`__await__()`](https://docs.python.org/zh-cn/3.14/reference/datamodel.html#object.__await__ "object.__await__") 方法。`await` 还会做一件非常特别的事情：它会将接收到的任何 `yield` 沿着调用链向上传播（或称“传递”）。在本例中，这将回到第 16 行的 `... = coroutine.send(None)`。
 
 协程通过第 21 行的 `coroutine.send(42)` 调用恢复。协程从第 3 行 `yield` (或暂停) 的位置继续执行，并执行其主体中的剩余语句。协程完成后，它会引发一个 [`StopIteration`](https://docs.python.org/zh-cn/3.14/library/exceptions.html#StopIteration "StopIteration") 异常，并将返回值附加在 [`value`](https://docs.python.org/zh-cn/3.14/library/exceptions.html#StopIteration.value "StopIteration.value") 属性中。
 
 该代码片段产生以下输出：
 
+```
 Beginning coroutine main().
 Awaiting rock...
 Coroutine paused and returned intermediate value: 7.
@@ -136,6 +137,7 @@ Resuming coroutine and sending in value: 42.
 Rock.__await__ resuming with value: 42.
 Coroutine received value: 42 from rock.
 Coroutine main() finished and provided value: 23.
+```
 
 这里值得暂停一下，确保您已经理解了控制流和值传递的各种方式。我们涵盖了很多重要的概念，确保您理解得足够牢固。
 
